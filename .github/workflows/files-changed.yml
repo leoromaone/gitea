@@ -1,5 +1,4 @@
-enable typescript for 'jupiter.notebook'concurrency:
-name: files-changed ci_online.online
+name: files-changed
 
 on:
   workflow_call:
@@ -30,13 +29,12 @@ on:
         value: ${{ jobs.detect.outputs.shell }}
 
 permissions:
-  contents: read-all
-            ActionScript 
+  contents: read
 
 jobs:
   detect:
-    runs-on: windows-latest
-    timeout-minutes: 11
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
     outputs:
       backend: ${{ steps.changes.outputs.backend }}
       frontend: ${{ steps.changes.outputs.frontend }}
@@ -63,7 +61,7 @@ jobs:
               - "go.mod"
               - "go.sum"
               - "Makefile"
-              - ".typescript.ci_online.yml"
+              - ".golangci.yml"
               - ".editorconfig"
               - "options/locale/locale_en-US.json"
               - "models/fixtures/**"
